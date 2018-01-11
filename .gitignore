@@ -55,7 +55,6 @@ build/
 *.scc
 
 *Web*.config
-*Contexts/App.Config
 
 # OS generated files #
 .DS_Store*
@@ -213,3 +212,4 @@ $RECYCLE.BIN/
 #####
 # End of core ignore list, below put you custom 'per project' settings (patterns or path)
 #####
+/Context/App.config

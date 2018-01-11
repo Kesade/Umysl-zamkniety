@@ -1,0 +1,23 @@
+﻿@model ICollection<Common.DomainEntities.ICommentDomainEntity>
+
+
+<div class="post-preview">
+    <hr>
+    <p class="post-title">
+        Comments:
+    </p>
+
+    @foreach (var item in Model)
+    {
+        <p class="post-comment">
+            @Html.DisplayFor(modelItem => item.Body)
+        </p>
+
+        <p class="post-meta">
+            Posted by
+            @Html.DisplayFor(modelItem => item.Author.Name, "Colour")
+            on @Html.DisplayFor(modelItem => item.Timestamp);
+        </p>
+        <hr/>
+    }
+</div>

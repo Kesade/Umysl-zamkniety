@@ -1,0 +1,42 @@
+﻿@model Common.UI.IPaged<Common.DomainEntities.IEntryDomainEntity>
+
+@{
+
+    Layout = null;
+}
+<div class="col-lg-8 col-md-10 mx-auto">
+    @if (Model.Content.Any())
+    {
+        foreach (var item in Model.Content)
+        {
+            <div class="post-preview">
+                <a href="@Url.Action("Index", "Home")">
+                    <h2 class="post-title">
+
+                        @Html.ActionLink(item.Title, "Details", new {id = item.Id})
+                    </h2>
+                    <p class="post-body">
+                        @Html.DisplayFor(modelItem => item.Body, "BeginningOfBody")
+                    </p>
+                </a>
+                <p class="post-meta">
+                    Posted by
+                    @Html.DisplayFor(modelItem => item.Author.Name)
+                    on @Html.DisplayFor(modelItem => item.Timestamp);
+                </p>
+            </div>
+            <hr>
+        }
+        <!-- Pager -->
+        <div class="clearfix">
+            @if (!string.IsNullOrEmpty(Model.PrevUrl))
+            {
+                <a class="btn btn-secondary float-left" href="@Model.PrevUrl">&larr; Newer Posts</a>
+            }
+            @if (!string.IsNullOrEmpty(Model.NextUrl))
+            {
+                <a class="btn btn-secondary float-right" href="@Model.NextUrl">Older Posts &rarr;</a>
+            }
+        </div>
+    }
+</div>

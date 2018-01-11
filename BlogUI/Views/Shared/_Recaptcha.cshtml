@@ -1,0 +1,8 @@
+﻿@using System.Configuration
+@model dynamic
+@{
+    Layout = null;
+}
+
+@Html.ValidationMessage("Recaptcha", new {@class = "text-danger"})
+<div class="g-recaptcha" data-sitekey="@ConfigurationManager.AppSettings["captchaAppPublicKey"]"></div>

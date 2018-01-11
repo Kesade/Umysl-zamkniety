@@ -1,0 +1,13 @@
+﻿@model string
+
+@{
+    var limit = 250;
+    if (Model.Length <= limit)
+    {
+        <i>@Model</i>
+    }
+    else
+    {
+        <i>@Model.Substring(0, limit) [...]</i>
+    }
+}

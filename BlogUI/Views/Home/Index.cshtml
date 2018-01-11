@@ -1,0 +1,12 @@
+﻿@model Common.UI.IDisplayEntries
+
+@{
+    ViewBag.Title = "Umysl Zamkniety";
+    ViewBag.BgImage = @"../../img/logo.jpg";
+    ViewBag.SubTitle = "Whatever you're thinking, think bigger";
+    ViewBag.SubHeading = "Tony Hsieh";
+}
+
+<div class="row">
+    @{ Html.RenderAction("GetEntries", "Entry", new {diaryId = Model.Diary.Id, page = Model.Page}); }
+</div>

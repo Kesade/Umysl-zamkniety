@@ -1,0 +1,53 @@
+﻿@model Common.UI.IEmailMessage
+@{
+    ViewBag.Title = "Umysł zamknięty";
+    ViewBag.BgImage = @"../../img/logo.jpg";
+    ViewBag.SubTitle = "So...";
+    ViewBag.SubHeading = "you would like to get in touch with me";
+}
+
+
+<div class="row">
+    <div class="col-lg-8 col-md-10 mx-auto">
+        <p>Fill out the form below to send me a message and I will try to get back to you within 24 hours!</p>
+        <!-- Contact Form - Enter your email address on line 19 of the mail/contact_me.php file to make this form work. -->
+        <!-- WARNING: Some web hosts do not allow emails to be sent through forms to common mail hosts like Gmail or Yahoo. It's recommended that you use a private domain email address! -->
+        <!-- NOTE: To use the contact form, your site must be on a live web host with PHP! The form will not work locally! -->
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            <div class="control-group">
+                <div class="form-group floating-label-form-group controls">
+                    @Html.LabelFor(model => model.Name, new {@class = "control-label col-md-2"})
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Name, new {htmlAttributes = new {required = "required", placeholder = "Name", id = "name", @class = "form-control"}})
+                        @Html.ValidationMessageFor(model => model.Name, "", new {@class = "text-danger"})
+                    </div>
+                </div>
+            </div>
+            <div class="control-group">
+                <div class="form-group floating-label-form-group controls">
+                    @Html.LabelFor(model => model.Email, new {@class = "control-label col-md-2"})
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Email, new {htmlAttributes = new {required = "required", placeholder = "Email Address", id = "email", @class = "form-control"}})
+                        @Html.ValidationMessageFor(model => model.Email, "", new {@class = "text-danger"})
+                    </div>
+                </div>
+            </div>
+            <div class="control-group">
+                <div class="form-group floating-label-form-group controls">
+                    @Html.LabelFor(model => model.Message, new {@class = "control-label col-md-2"})
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Message, new {htmlAttributes = new {required = "required", placeholder = "Message", id = "message", @class = "form-control"}})
+                        @Html.ValidationMessageFor(model => model.Message, "", new {@class = "text-danger"})
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div id="success"></div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-secondary" id="sendMessageButton">Send</button>
+            </div>
+        }
+    </div>
+</div>

@@ -1,0 +1,63 @@
+﻿@model Common.UI.ICreateUser
+
+@{
+    ViewBag.Title = "Umysl Zamkniety";
+    ViewBag.BgImage = @"../../img/logo.jpg";
+    ViewBag.SubTitle = "Whatever you're thinking, think bigger";
+    ViewBag.SubHeading = "Tony Hsieh";
+}
+
+<div class="row">
+    <div class="col-lg-8 col-md-10 mx-auto">
+        <h2>Create user:</h2>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                @Html.ValidationMessage("DuplicateLogin", new {@class = "text-danger"})
+                <hr/>
+                <div class="form-group floating-label-form-group">
+                    @Html.LabelFor(model => model.Login, new {@class = "control-label col-md-2"})
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Login, new {htmlAttributes = new {placeholder = "Login", @class = "form-control"}})
+                        @Html.ValidationMessageFor(model => model.Login, "", new {@class = "text-danger"})
+                    </div>
+                </div>
+                <div class="form-group floating-label-form-group">
+                    @Html.LabelFor(model => model.Name, new {@class = "control-label col-md-2"})
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Name, new {htmlAttributes = new {placeholder = "Name", @class = "form-control"}})
+                        @Html.ValidationMessageFor(model => model.Name, "", new {@class = "text-danger"})
+                    </div>
+                </div>
+                <div class="form-group floating-label-form-group">
+                    @Html.LabelFor(model => model.Password, new {@class = "control-label col-md-2"})
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Password, new {htmlAttributes = new {placeholder = "Password", type = "password", @class = "form-control"}})
+                        @Html.ValidationMessageFor(model => model.Password, "", new {@class = "text-danger"})
+                    </div>
+                </div>
+
+                <div class="form-group floating-label-form-group">
+                    @Html.LabelFor(model => model.ConfirmPassword, new {@class = "control-label col-md-2"})
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.ConfirmPassword, new {htmlAttributes = new {placeholder = "Confirm Password", type = "password", @class = "form-control"}})
+                        @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new {@class = "text-danger"})
+                    </div>
+                </div>
+                @Html.Partial("_Recaptcha")
+                <br/>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Create" class="btn btn-default"/>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

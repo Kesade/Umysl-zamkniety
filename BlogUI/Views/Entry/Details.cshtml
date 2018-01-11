@@ -1,0 +1,57 @@
+﻿@model Common.UI.IDisplayEntry
+
+@{
+    ViewBag.Title = "Umysł zamknięty";
+    ViewBag.BgImage = @"../../img/logo.jpg";
+    ViewBag.SubTitle = "Whatever you're thinking, think bigger";
+    ViewBag.SubHeading = "Tony Hsieh";
+}
+
+<div class="row">
+    <div class="col-lg-8 col-md-10 mx-auto">
+        <h2>@Html.DisplayFor(model => model.Entry.Title)</h2>
+
+        <div>
+            <dl class="dl-horizontal">
+
+
+                <dd class="pull-right">
+                    @Html.DisplayFor(model => model.Entry.Timestamp)
+                </dd>
+
+
+                <dd>
+                    @Html.DisplayFor(model => model.Entry.Body)
+                </dd>
+
+
+            </dl>
+        </div>
+        <h4 class="post-subtitle pull-right" id="clickme">Would you like to comment?</h4>
+        <br/>
+        <br/>
+        @Html.ValidationSummary(false, "", new {@class = "text-danger"})
+        <div id="add-comment" style="display: none">
+            @{
+                Html.RenderAction("Create", "Comment", Model.NewComment);
+            }
+        </div>
+        <div id="comments">
+            @{
+                Html.RenderPartial("~/Views/Comment/Comments.cshtml", Model.Entry.Comments);
+            }
+        </div>
+        <p>
+            @Html.ActionLink("Back to List", "Index","Home")
+        </p>
+    </div>
+</div>
+<script>
+    $("#clickme").click(function() {
+        if ($("#add-comment").is(":visible")) {
+            $("#add-comment").hide("slow");
+        } else {
+            $("#add-comment").show("slow");
+        }
+    });
+</script>
