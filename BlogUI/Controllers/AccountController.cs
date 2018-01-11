@@ -128,9 +128,9 @@ namespace BlogUI.Controllers
                     Password = model.Password
                 });
             }
-            catch (UnauthorizedAccessException)
+            catch (UnauthorizedAccessException e)
             {
-                ModelState.AddModelError("InvalidLogin", "Invalid login attempt.");
+                ModelState.AddModelError("InvalidLogin", e.Message);
             }
 
             return user;

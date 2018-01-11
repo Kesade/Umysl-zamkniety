@@ -27,12 +27,11 @@ namespace RepositoryHandlers.EntityFramework.Concrete
             return ((ICommentEntity) obj).ConvertToDomain();
         }
 
-        protected override async Task<ICommentDomainEntity> UpdateAuthor(ICommentDomainEntity toUpdate)
+        protected override async Task UpdateAuthor(ICommentDomainEntity toUpdate)
         {
             var user = await UserRepository.FindByIdAsync(toUpdate.Author.Id);
-
             toUpdate.Author = user.ConvertToDomain();
-            return toUpdate;
+     
         }
 
 
@@ -43,7 +42,7 @@ namespace RepositoryHandlers.EntityFramework.Concrete
 
         public override async Task<ICommentDomainEntity> GetDomainMetaData(ICommentDomainEntity entity)
         {
-            entity = await UpdateAuthor(entity);
+            await UpdateAuthor(entity);
             entity.Entry = (await PostRepository.FindByIdAsync(entity.Entry.Id)).ConvertToDomain();
 
             return entity;

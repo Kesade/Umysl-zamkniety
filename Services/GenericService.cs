@@ -29,10 +29,10 @@ namespace Services
 
         public async Task<T> GetById(int id)
         {
-            return await Handler.GetDomainMetaData(await Handler.GetDomainById(id));
+            return await Enrich(await Handler.GetDomainById(id));
         }
 
-        public async Task<T> Enrich(T obj)
+        private async Task<T> Enrich(T obj)
         {
             return await Handler.GetDomainMetaData(obj);
         }
@@ -52,9 +52,9 @@ namespace Services
             await Handler.CreateAsync(obj);
         }
 
-        public async Task<bool> Exists(int id)
+        public virtual async Task<bool> Exists(T obj)
         {
-            return await Handler.GetDomainById(id) != null;
+            return await GetEntityById(obj.Id) != null;
         }
 
         public async Task<IQueryable<T>> GetRepository()

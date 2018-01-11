@@ -15,19 +15,6 @@ namespace Services
         public UserService(IRepositoryHandler<IUserDomainEntity> handler) : base(handler)
         {
         }
-
-        public async Task<IUserDomainEntity> GetCurrentUser()
-        {
-            return await GetUser(new User {Login = HttpContext.Current.User.Identity.Name});
-        }
-
-        public async Task<IUserDomainEntity> GetUser(IUserDomainEntity user)
-        {
-            return string.IsNullOrEmpty(user?.Login)
-                ? (await Handler.GetDomainRepository()).FirstOrDefault(x => x.Name == "Guest")
-                : (await Handler.GetDomainRepository()).FirstOrDefault(x => x.Login == user.Login);
-        }
-
         public async Task Put(ICreateUser model)
         {
             await Put(new User
@@ -39,13 +26,43 @@ namespace Services
             });
         }
 
+        public async Task<IUserDomainEntity> GetCurrentUser()
+        {
+            return await GetUser(new User {Login = HttpContext.Current.User.Identity.Name});
+        }
+
+        public async Task<IUserDomainEntity> GetUser(IUserDomainEntity user)
+        {
+            if (await Exists(user))
+                return await EnrichUser(user);
+            
+            return (await Handler.GetDomainRepository()).FirstOrDefault(x => x.Name == "Guest");
+        }
+
+        private async Task<IUserDomainEntity> EnrichUser(IUserDomainEntity user)
+        {
+            return (await Handler.GetDomainRepository()).FirstOrDefault(x => x.Login == user.Login);
+        }
+
+        public override async Task<bool> Exists(IUserDomainEntity user)
+        {
+            if (user?.Login == null)
+                throw new ArgumentException("User has to have login");
+
+            return await EnrichUser(user) != null;
+        }
+
         #region Authorization
 
         public async Task<IUserDomainEntity> AuthorizeUser(IUserDomainEntity user)
         {
-            var dbUser = (await Handler.GetDomainRepository()).FirstOrDefault(x => x.Login == user.Login);
+            if (!await Exists(user))
+                throw new UnauthorizedAccessException("There is no user with given login.");         
+            
+            var dbUser = await EnrichUser(user);
+
             if (dbUser == null || !IsPasswordProvidedMatchingDb(user, dbUser))
-                throw new UnauthorizedAccessException();
+                throw new UnauthorizedAccessException("Provided password is wrong.");
 
             return dbUser;
         }

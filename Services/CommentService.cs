@@ -12,7 +12,6 @@ namespace Services
         public CommentService(IRepositoryHandler<ICommentDomainEntity> handler) : base(handler)
         {
         }
-
         public async Task Put(ICreateComment model)
         {
             await Put(new Comment
@@ -23,5 +22,7 @@ namespace Services
                 Entry = model.Entry
             });
         }
+
+    
     }
 }

@@ -80,6 +80,6 @@ namespace RepositoryHandlers.EntityFramework.Concrete
             return ConvertToDomain(await GetEntityById(id));
         }
 
-        protected abstract Task<TD> UpdateAuthor(TD toUpdate);
+        protected abstract Task UpdateAuthor(TD toUpdate);
     }
 }

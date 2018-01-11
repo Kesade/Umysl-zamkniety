@@ -33,12 +33,10 @@ namespace RepositoryHandlers.EntityFramework.Concrete
             return ((IEntryEntity) obj).ConvertToDomain();
         }
 
-        protected override async Task<IEntryDomainEntity> UpdateAuthor(IEntryDomainEntity entity)
+        protected override async Task UpdateAuthor(IEntryDomainEntity entity)
         {
             var user = await UserRepository.FindByIdAsync(entity.Author.Id);
-
             entity.Author = user.ConvertToDomain();
-            return entity;
         }
 
         public override IStorageEntity ConvertToEntity(IEntryDomainEntity entities)
@@ -48,21 +46,22 @@ namespace RepositoryHandlers.EntityFramework.Concrete
 
         public override async Task<IEntryDomainEntity> GetDomainMetaData(IEntryDomainEntity entity)
         {
-            entity = await UpdateAuthor(entity);
-
+            await UpdateAuthor(entity);
             entity.Diary = (await BlogRepository.FindByIdAsync(entity.Diary.Id)).ConvertToDomain();
+            await UpdateComments(entity);
+            
+            return entity;
+        }
 
+        private async Task UpdateComments(IEntryDomainEntity entity)
+        {
             var comments = (await CommentRepository.GetQuerableSet().Where(x => x.EntryId == entity.Id).ToListAsync())
-                    .OrderByDescending(x => x.Timestamp).Select(x => x.ConvertToDomain())
-                ;
-            var commentDomainEntities = comments as IList<ICommentDomainEntity> ?? comments.ToList();
-            foreach (var com in commentDomainEntities)
+                                .OrderByDescending(x => x.Timestamp).Select(x => x.ConvertToDomain()).ToList();
+            
+            foreach (var com in comments)
                 com.Author = (await UserRepository.FindByIdAsync(com.Author.Id)).ConvertToDomain();
 
-
-            entity.Comments = commentDomainEntities;
-
-            return entity;
+            entity.Comments = comments;
         }
     }
 }

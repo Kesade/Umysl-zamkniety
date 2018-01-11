@@ -23,10 +23,11 @@ namespace RepositoryHandlers.EntityFramework.Concrete
             return ((IUserEntity) obj).ConvertToDomain();
         }
 
-        protected override async Task<IUserDomainEntity> UpdateAuthor(IUserDomainEntity toUpdate)
+        protected override async Task UpdateAuthor(IUserDomainEntity toUpdate)
         {
-            return toUpdate;
+            toUpdate = (await Repository.FindByIdAsync(toUpdate.Id)).ConvertToDomain();
         }
+
 
         public override IStorageEntity ConvertToEntity(IUserDomainEntity entities)
         {

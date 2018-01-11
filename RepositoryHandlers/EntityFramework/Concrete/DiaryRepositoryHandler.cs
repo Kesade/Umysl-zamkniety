@@ -29,12 +29,10 @@ namespace RepositoryHandlers.EntityFramework.Concrete
             return ((IDiaryEntity) obj).ConvertToDomain();
         }
 
-        protected override async Task<IDiaryDomainEntity> UpdateAuthor(IDiaryDomainEntity toUpdate)
+        protected override async Task UpdateAuthor(IDiaryDomainEntity toUpdate)
         {
             var user = await UserRepository.FindByIdAsync(toUpdate.Author.Id);
-
             toUpdate.Author = user.ConvertToDomain();
-            return toUpdate;
         }
 
 
@@ -43,11 +41,9 @@ namespace RepositoryHandlers.EntityFramework.Concrete
             return entities.ConvertToEntity();
         }
 
-        public new async Task<IDiaryDomainEntity> GetDomainMetaData(IDiaryDomainEntity entity)
+        public override async Task<IDiaryDomainEntity> GetDomainMetaData(IDiaryDomainEntity entity)
         {
-            var user = await UserRepository.FindByIdAsync(entity.Author.Id);
-
-            entity.Author = user.ConvertToDomain();
+            await UpdateAuthor(entity);
             entity.Entries = (await PostRepository.GetQuerableSet().Where(x => x.DiaryId == entity.Id).ToListAsync())
                 .Select(x => x.ConvertToDomain()).ToList();
 
