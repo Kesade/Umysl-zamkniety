@@ -1,3 +1,4 @@
+using System.Configuration;
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
 using Entities;
@@ -13,7 +14,7 @@ namespace Contexts.Contexts
         // If you wish to target a different database and/or database provider, modify the 'DiaryDbContext' 
         // connection string in the application configuration file.
         public DiaryDbContext()
-            : base(@"Data Source=localhost;Initial Catalog=Blog;Integrated Security=True")
+            : base(ConfigurationManager.AppSettings["connectionString"])
         {
         }
 
