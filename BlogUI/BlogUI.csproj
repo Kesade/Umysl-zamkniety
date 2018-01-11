@@ -176,6 +176,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\SmsService.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\AdministrateController.cs" />
     <Compile Include="Controllers\Api\GenericApiController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Models\CaptchaResponse.cs" />
@@ -270,6 +271,7 @@
     <Content Include="Content\bootstrap-theme.css.map" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
+    <Content Include="Scripts\facebook.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
     <Content Include="Scripts\jquery-1.9.1.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
@@ -322,6 +324,9 @@
     <Content Include="Views\Comment\Create.cshtml" />
     <Content Include="Views\Entry\GetEntries.cshtml" />
     <Content Include="Views\Entry\Details.cshtml" />
+    <Content Include="Views\Shared\_FacebookShare.cshtml" />
+    <Content Include="Views\Shared\_FacebookInit.cshtml" />
+    <Content Include="Views\Administrate\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

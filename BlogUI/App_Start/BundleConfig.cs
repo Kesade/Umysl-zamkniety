@@ -24,6 +24,9 @@ namespace BlogUI
                 "~/Scripts/popper.js",
                 "~/Scripts/bootstrap.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/facebook").Include(
+                "~/Scripts/facebook.js"));
+
             bundles.Add(new ScriptBundle("~/bundles/blog").Include(
                 "~/Scripts/autosize.min.js",
                 "~/Scripts/clean-blog.min.js"));

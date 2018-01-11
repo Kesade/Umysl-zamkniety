@@ -31,19 +31,24 @@ namespace BlogUI.Controllers
         [HttpPost]
         public async Task<ActionResult> Contact(ContactMessage msg)
         {
+            SendMsg(msg);
+
+            return OkResult("Email was sent, thank you :)");
+        }
+
+        public void SendMsg(ContactMessage msg)
+        {
             var mail = ConfigurationManager.AppSettings["mailerUser"];
             var client = new SmtpClient("smtp.gmail.com", 587)
             {
                 Credentials = new NetworkCredential(
                     mail,
                     ConfigurationManager.AppSettings["mailerPassword"]),
-                    EnableSsl = true
+                EnableSsl = true
             };
 
             client.Send(new MailMessage(msg.Email, mail,
                 $"Message from {msg.Name} - {msg.Email}", msg.Message));
-
-            return OkResult("Email was sent, thank you :)");
         }
 
         public virtual async Task<ActionResult> About()

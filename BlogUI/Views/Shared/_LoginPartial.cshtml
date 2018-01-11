@@ -11,8 +11,13 @@
                 <a class="nav-item" href="javascript:document.getElementById('logoutForm').submit()">Log off</a>
 
             </li>
-        @*<li class="nav-item">
-        </li>*@
+
+            if (User.IsInRole("Administrator"))
+            {
+                <li class="nav-item">
+                    @Html.ActionLink("Administration panel", "Index", "Administrate", null, new {@class = "nav-item"})
+                </li>
+            }
         }
     }
     else

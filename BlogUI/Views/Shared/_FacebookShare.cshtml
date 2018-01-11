@@ -1,0 +1,20 @@
+﻿  <ul class="list-inline text-center">
+    <li class="list-inline-item">
+        <a id="shareFb" href="#">
+            <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+            </span>
+        </a>
+    </li>
+</ul>
+<script>
+    document.getElementById('shareFb').onclick = function() {
+        FB.ui({
+                method: 'share',
+                display: 'popup',
+                href: '@HttpContext.Current.Request.Url.AbsoluteUri'
+            },
+            function(response) { });
+    };
+</script>
