@@ -331,6 +331,7 @@
     <Content Include="Views\Administrate\Index.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\UpperFirstSign.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\UpperDateFirstSign.cshtml" />
+    <Content Include="Views\Comment\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

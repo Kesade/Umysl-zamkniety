@@ -25,7 +25,7 @@ section.add-comment #clickme h4:first-line {
         
     font-size-adjust: 0.58;
     font-size: 130%;
-    font-family: fantasy
+
 }
 
 section.entry {
@@ -42,7 +42,6 @@ section.entry #entry-header p:first-line {
 section.entry p:first-letter {
     font-size-adjust: 0.58;
     font-size: 200%;
-    font-family: fantasy;
 }
 
 section.entry:before {

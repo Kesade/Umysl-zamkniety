@@ -1,0 +1,21 @@
+﻿@using BlogUI.Controllers
+@model DeleteComment
+
+@{
+    Layout = null;
+}
+<p>
+    @if (Request.IsAuthenticated)
+    {
+        if (Model.Author.Login == User.Identity.Name)
+        {
+             using (Html.BeginForm("Delete", "Comment", FormMethod.Post, null))
+             {
+                 @Html.AntiForgeryToken()
+                 @Html.HiddenFor2(x => x.ParrentId)
+                 @Html.HiddenFor2(x => x.Id)
+                 <input type="submit" value="Delete comment." class="btn btn-default"/>
+             }
+        }
+    }
+</p>    

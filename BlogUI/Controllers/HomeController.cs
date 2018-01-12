@@ -29,6 +29,7 @@ namespace BlogUI.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<ActionResult> Contact(ContactMessage msg)
         {
             SendMsg(msg);

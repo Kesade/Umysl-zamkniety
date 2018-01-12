@@ -35,6 +35,7 @@ namespace BlogUI.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public virtual async Task<ActionResult> Create(CreateEntry model)
         {
             model.Diary = await _diary.GetById(model.ParrentId);
@@ -64,6 +65,7 @@ namespace BlogUI.Controllers
 
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<ActionResult> CreateComment(CreateComment model)
         {
             //if (!ValidateReCaptcha())
