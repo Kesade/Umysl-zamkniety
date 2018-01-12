@@ -1,23 +1,23 @@
 ﻿@model ICollection<Common.DomainEntities.ICommentDomainEntity>
-
-
-<div class="post-preview">
-    <hr>
-    <p class="post-title">
-        Comments:
-    </p>
-
-    @foreach (var item in Model)
-    {
-        <p class="post-comment">
-            @Html.DisplayFor(modelItem => item.Body)
-        </p>
-
-        <p class="post-meta">
-            Posted by
-            @Html.DisplayFor(modelItem => item.Author.Name, "Colour")
-            on @Html.DisplayFor(modelItem => item.Timestamp);
-        </p>
-        <hr/>
-    }
-</div>
+@{
+    Layout = null;
+}
+@foreach (var item in Model)
+{
+    <div id="comment">
+        <blockquote class="comment">
+            <h6 class="post-subtitle">
+                Posted by @Html.DisplayFor(modelItem => item.Author.Name, "Colour")
+                on @Html.DisplayFor(modelItem => item.Timestamp)
+            </h6>
+            <hr/>
+            <p>
+                @Html.DisplayFor(modelItem => item.Body)
+            </p>
+        </blockquote>
+        @if (Model.Last() != item)
+        {
+            <hr/>
+        }
+    </div>
+}

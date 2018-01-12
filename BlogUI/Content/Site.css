@@ -1,17 +1,77 @@
-﻿body {
+﻿/*body {
     padding-bottom: 20px;
     padding-top: 50px;
-}
+}*/
 
 /* Set padding to keep content from hitting the edges */
 
-.body-content {
+/*.body-content {
     padding-left: 15px;
     padding-right: 15px;
-}
+}*/
 
 /* Set width on the form input elements since they're 100% wide by default */
 
-input,
+/*input,
 select,
-textarea { max-width: 280px; }
+textarea { max-width: 280px; }*/
+
+
+#comment { padding-left: 2%; }
+
+/*section.comments { }*/
+
+section.add-comment #clickme h4:first-line {
+        
+    font-size-adjust: 0.58;
+    font-size: 130%;
+    font-family: fantasy
+}
+
+section.entry {
+    margin: 1.5em 25px;
+    padding: 0.5em 5px;
+}
+
+section.entry #entry-header p:first-line {
+    
+    font-size: 180%;
+    font-family: fantasy;    
+}
+
+section.entry p:first-letter {
+    font-size-adjust: 0.58;
+    font-size: 200%;
+    font-family: fantasy;
+}
+
+section.entry:before {
+    font-size: 4em;
+    line-height: 0.1em;
+    margin-right: 0.25em;
+    vertical-align: -0.4em;
+}
+
+blockquote.comment {
+    background: #046865;
+    border-left: 10px solid #21A0A0;
+    margin: 1.5em 10px;
+    padding: 0.5em 10px;
+    color: lightcyan;
+    quotes: "\201C" "\201D" "\2018" "\2019";
+    -webkit-box-shadow: 7px 10px 19px -2px rgba(33, 160, 160, 0.86);
+    -moz-box-shadow: 7px 10px 19px -2px rgba(33, 160, 160, 0.86);
+    box-shadow: 7px 10px 19px -2px rgba(33, 160, 160, 0.86);
+}
+
+blockquote.comment:before {
+    color: rgb(33, 160, 160);
+    content: open-quote;
+    font-size: 4em;
+    color: lightcyan;
+    line-height: 0.1em;
+    margin-right: 0.25em;
+    vertical-align: -0.4em;
+}
+
+blockquote p { display: inline; }

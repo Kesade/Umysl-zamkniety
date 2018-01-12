@@ -210,6 +210,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\clean-blog.css" />
     <Content Include="Content\clean-blog.min.css" />
+    <Content Include="Content\prism.css" />
     <Content Include="Content\Site.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\font-awesome\css\font-awesome.css" />
@@ -279,6 +280,7 @@
     <Content Include="Scripts\popper-utils.min.js" />
     <Content Include="Scripts\popper.js" />
     <Content Include="Scripts\popper.min.js" />
+    <Content Include="Scripts\prism.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\umd\popper-utils.js" />
@@ -327,6 +329,8 @@
     <Content Include="Views\Shared\_FacebookShare.cshtml" />
     <Content Include="Views\Shared\_FacebookInit.cshtml" />
     <Content Include="Views\Administrate\Index.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\UpperFirstSign.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\UpperDateFirstSign.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

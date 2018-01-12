@@ -8,50 +8,40 @@
 }
 
 <div class="row">
-    <div class="col-lg-8 col-md-10 mx-auto">
-        <h2>@Html.DisplayFor(model => model.Entry.Title)</h2>
-
-        <div>
-            <dl class="dl-horizontal">
+    <article class="col-lg-10 col-md-8 mx-auto">
 
 
-                <dd class="pull-right">
-                    @Html.DisplayFor(model => model.Entry.Timestamp)
-                </dd>
+        <div class="row">
+            <section class="entry">
+                <section id="entry-header">
+                    <h3>@Html.DisplayFor(model => model.Entry.Title, "UpperFirstSign")</h3>
+                </section>
+                <p>
+                    @Html.DisplayFor(model => model.Entry.Body, "UpperFirstSign")
+                </p>
 
-
-                <dd>
-                    @Html.DisplayFor(model => model.Entry.Body)
-                </dd>
-
-
-            </dl>
+                <section id="entry-footer">
+                    <p align="right">@Html.DisplayFor(model => model.Entry.Timestamp, "UpperDateFirstSign")</p>
+                </section>
+            </section>
         </div>
-        <h4 class="post-subtitle pull-right" id="clickme">Would you like to comment?</h4>
-        <br/>
-        <br/>
-        @Html.ValidationSummary(false, "", new {@class = "text-danger"})
-        <div id="add-comment" style="display: none">
+        <section class="add-comment">
+            @Html.ValidationSummary(false, "", new {@class = "text-danger"})
             @{
                 Html.RenderAction("Create", "Comment", Model.NewComment);
             }
-        </div>
-        <div id="comments">
-            @{
-                Html.RenderPartial("~/Views/Comment/Comments.cshtml", Model.Entry.Comments);
-            }
+        </section>
+
+        <br/><hr/>
+        <div class="row">
+            <section class="comments">
+                @{
+                    Html.RenderPartial("~/Views/Comment/Comments.cshtml", Model.Entry.Comments);
+                }
+            </section>
         </div>
         <p>
-            @Html.ActionLink("Back to List", "Index","Home")
+            @Html.ActionLink("Back to List", "Index", "Home")
         </p>
-    </div>
+    </article>
 </div>
-<script>
-    $("#clickme").click(function() {
-        if ($("#add-comment").is(":visible")) {
-            $("#add-comment").hide("slow");
-        } else {
-            $("#add-comment").show("slow");
-        }
-    });
-</script>

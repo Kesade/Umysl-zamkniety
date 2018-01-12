@@ -2,28 +2,37 @@
 @{
     Layout = null;
 }
-<div>
-    @using (Html.BeginForm("CreateComment", "Entry", FormMethod.Post, null))
+<div id="clickme">
+    <h4 class="post-subtitle">Would you like to comment?</h4>
+</div>
 
+<div id="create-comment" style="display: none">
+    @using (Html.BeginForm("CreateComment", "Entry", FormMethod.Post, null))
     {
         @Html.AntiForgeryToken()
         @Html.HiddenFor(x => x.ParrentId)
-        <div class="form-horizontal">
-            <div class="form-group floating-label-form-group">
-                <div class="col-md-10">
-                    @Html.TextAreaFor(model => model.Body, new {style = "width:115%", id = "autosize", placeholder = "Share your opinion", @class = "form-control"})
-                    @Html.ValidationMessageFor(model => model.Body, "", new {@class = "text-danger"})
+        <div class="col-md-10">
+            @Html.TextAreaFor(model => model.Body, new {style = "width:115%", id = "autosize", placeholder = "Share your opinion", @class = "form-control"})
+            @Html.ValidationMessageFor(model => model.Body, "", new {@class = "text-danger"})
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-10">
+                <div class="fa-pull-right">
+                    @* @Html.Partial("_Recaptcha")*@
                 </div>
-            </div>
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <div class="fa-pull-right">
-                        @* @Html.Partial("_Recaptcha")*@
-                    </div>
-                    <input type="submit" value="Post comment." class="btn btn-default"/>
-                </div>
+                <input type="submit" value="Post comment." class="btn btn-default"/>
             </div>
         </div>
     }
-    <br/>
 </div>
+
+<script>
+    $("#clickme").click(function() {
+        if ($("#create-comment").is(":visible")) {
+            $("#create-comment").hide("slow");
+        } else {
+            $("#create-comment").show("slow");
+        }
+    });
+</script>

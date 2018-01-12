@@ -32,6 +32,7 @@ namespace BlogUI
                 "~/Scripts/clean-blog.min.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
+                "~/Content/Site.css",
                 "~/Content/bootstrap.css",
                 "~/Content/clean-blog.min.css"));
         }
