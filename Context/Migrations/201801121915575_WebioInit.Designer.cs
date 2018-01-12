@@ -7,13 +7,13 @@ namespace Contexts.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class Init : IMigrationMetadata
+    public sealed partial class WebioInit : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Init));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(WebioInit));
         
         string IMigrationMetadata.Id
         {
-            get { return "201711261353470_Init"; }
+            get { return "201801121915575_WebioInit"; }
         }
         
         string IMigrationMetadata.Source

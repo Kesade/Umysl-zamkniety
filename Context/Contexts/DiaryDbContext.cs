@@ -14,7 +14,7 @@ namespace Contexts.Contexts
         // If you wish to target a different database and/or database provider, modify the 'DiaryDbContext' 
         // connection string in the application configuration file.
         public DiaryDbContext()
-            : base(ConfigurationManager.AppSettings["connectionString"])
+            : base(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString)
         {
         }
 

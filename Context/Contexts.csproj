@@ -57,17 +57,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Contexts\DiaryDbContext.cs" />
-    <Compile Include="Migrations\201711261353470_Init.cs" />
-    <Compile Include="Migrations\201711261353470_Init.Designer.cs">
-      <DependentUpon>201711261353470_Init.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201801080045091_UserModelUpdated.cs" />
-    <Compile Include="Migrations\201801080045091_UserModelUpdated.Designer.cs">
-      <DependentUpon>201801080045091_UserModelUpdated.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201801080525597_IndexUniqueLogin.cs" />
-    <Compile Include="Migrations\201801080525597_IndexUniqueLogin.Designer.cs">
-      <DependentUpon>201801080525597_IndexUniqueLogin.cs</DependentUpon>
+    <Compile Include="Migrations\201801121915575_WebioInit.cs" />
+    <Compile Include="Migrations\201801121915575_WebioInit.Designer.cs">
+      <DependentUpon>201801121915575_WebioInit.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -83,14 +75,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201711261353470_Init.resx">
-      <DependentUpon>201711261353470_Init.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201801080045091_UserModelUpdated.resx">
-      <DependentUpon>201801080045091_UserModelUpdated.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201801080525597_IndexUniqueLogin.resx">
-      <DependentUpon>201801080525597_IndexUniqueLogin.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201801121915575_WebioInit.resx">
+      <DependentUpon>201801121915575_WebioInit.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
