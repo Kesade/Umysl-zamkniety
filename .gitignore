@@ -212,3 +212,4 @@ $RECYCLE.BIN/
 #####
 # End of core ignore list, below put you custom 'per project' settings (patterns or path)
 #####
+/BlogUI/Properties/PublishProfiles/umyslzamkniety.pl - Web Deploy.pubxml
