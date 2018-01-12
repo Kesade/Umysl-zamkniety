@@ -6,7 +6,6 @@ using System.Web.Mvc;
 using BlogUI.Models;
 using Common.DomainEntities;
 using Common.Services;
-using Services;
 
 namespace BlogUI.Controllers
 {
