@@ -34,7 +34,7 @@ namespace BlogUI.Controllers
         {
             SendMsg(msg);
 
-            return OkResult("Email was sent, thank you :)");
+            return RedirectToAction("OkResult", new { message = "Email was sent, thank you :)"});
         }
 
         public void SendMsg(ContactMessage msg)

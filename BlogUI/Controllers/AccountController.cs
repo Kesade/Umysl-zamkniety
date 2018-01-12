@@ -34,7 +34,7 @@ namespace BlogUI.Controllers
             if (!ModelState.IsValid || !await RegisterUser(model))
                 return View(model);
 
-            return OkResult($"Hello {model.Name}, your account with Login {model.Login} was successfully created.");
+            return RedirectToAction("OkResult", new{message = $"Hello {model.Name}, your account with Login {model.Login} was successfully created."});
         }
 
         [HttpGet]
@@ -59,7 +59,7 @@ namespace BlogUI.Controllers
         {
             FormsAuthentication.SignOut();
 
-            return OkResult($"You have successfully logged out.");
+            return RedirectToAction("OkResult", new { message = $"You have successfully logged out."});
         }
 
         public ActionResult Manage()

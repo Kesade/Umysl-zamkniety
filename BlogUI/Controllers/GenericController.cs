@@ -18,9 +18,12 @@ namespace BlogUI.Controllers
 
         public ActionResult OkResult(string message)
         {
+            ModelState.Clear();
             ViewBag.Message = message;
             return View("_Ok");
         }
+
+     
         protected IService<T> Service { get; }
 
         //protected Dictionary<string, string> GetModelStateErrors(string key)

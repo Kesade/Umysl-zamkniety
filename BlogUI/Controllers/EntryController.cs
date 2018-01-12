@@ -43,7 +43,7 @@ namespace BlogUI.Controllers
             await ((EntryService) Service).Put(model);
 
             
-            return OkResult($"Post {model.Title} was successfully posted.");
+            return RedirectToAction("OkResult", new { message = $"Post {model.Title} was successfully posted."});
         }
 
         [HttpGet]
