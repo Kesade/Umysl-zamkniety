@@ -22,7 +22,7 @@ namespace BlogUI.Controllers
         {
             ModelState.Clear();
             ViewBag.Message = message;
-            return View("_Ok");
+            return View("_Message");
         }
 
      

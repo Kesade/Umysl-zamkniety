@@ -23,7 +23,7 @@
                     <p class="post-meta">
                         Posted by
                         @Html.DisplayFor(modelItem => item.Author.Name)
-                        on @Html.DisplayFor(modelItem => item.Timestamp);
+                        on @Html.DisplayFor(modelItem => item.Timestamp,"DateTime")
                     </p>
                 </div>
                 @if (Model.Content.Last()!=item)

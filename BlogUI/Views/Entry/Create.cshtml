@@ -1,14 +1,6 @@
-﻿@using Common.Helpers
-@model Common.UI.ICreateEntry
+﻿@model Common.UI.ICreateEntry
 
-@{
-    ViewBag.Title = "Umysł zamknięty";
-    ViewBag.BgImage = @"../../img/logo.jpg";
-    ViewBag.SubTitle = "Create Post";
-}
-
-<h2>Create - @HttpContext.Current.User.Identity.Name</h2>
-
+<h2>Create Post</h2>
 
 @using (Html.BeginForm("Create","Entry",null,FormMethod.Post,new {id="form"}))
 {
@@ -30,7 +22,7 @@
         <br/>
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <div id="Save" class="btn btn-default">Submit</div>
+                <input type="submit" value="Submit" id="Save" class="btn btn-default"/>
             </div>
         </div>
     </div>

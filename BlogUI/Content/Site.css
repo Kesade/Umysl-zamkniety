@@ -21,27 +21,25 @@ textarea { max-width: 280px; }*/
 
 /*section.comments { }*/
 
-section.add-comment #clickme h4:first-line {
+/*section.entry #add-comment #clickme h4:first-line {
         
     font-size-adjust: 0.58;
     font-size: 130%;
 
-}
+}*/
 
-section.entry {
+/*section.entry {
     margin: 1.5em 25px;
     padding: 0.5em 5px;
-}
+}*/
 
-section.entry #entry-header p:first-line {
+section.entry > #entry-header p:first-line {
     
-    font-size: 180%;
-    font-family: fantasy;    
+    /*font-size: 150%;*/  
 }
 
-section.entry p:first-letter {
-    font-size-adjust: 0.58;
-    font-size: 200%;
+section.entry p:first-letter{
+    font-size: 150%;
 }
 
 section.entry:before {
@@ -76,3 +74,5 @@ blockquote.comment {
     }
 
 blockquote p { display: inline; }
+
+

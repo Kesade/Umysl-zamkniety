@@ -1,18 +1,33 @@
 ﻿@using System.Text.RegularExpressions
-
+@using Common.Helpers
 @model string
 
 @{
 
-    var limit = Model.Length > 250 ? 250 : Model.Length;
+    var limitReached = false;
+    var limit = 250;
 
-    if (Regex.IsMatch(Model.Substring(0, limit).ToLower(), @"<pre"))
+    if (Model.HtmlToPlainText().Length > limit)
     {
-        while (!Regex.IsMatch(Model.Substring(0, limit).ToLower(), @"</pre>"))
+        limitReached = true;
+
+        if (Regex.IsMatch(Model.Substring(0, limit).ToLower(), @"<pre"))
         {
-            limit++;
+            while (!Regex.IsMatch(Model.Substring(0, limit).ToLower(), @"</pre>"))
+            {
+                limit++;
+            }
         }
     }
-
-    <i>@Html.Raw(Model.Substring(0, limit)) [...]</i>
+    else
+    {
+        limit = Model.Length;
+    }
+    <i>    
+        @Html.Raw(Model.Substring(0, limit))
+        @if (limitReached)
+        {
+           @:[...]
+        }
+    </i>
 }

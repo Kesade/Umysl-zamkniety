@@ -7,6 +7,7 @@ namespace BlogUI
         // For more information on bundling, visit https://go.microsoft.com/fwlink/?LinkId=301862
         public static void RegisterBundles(BundleCollection bundles)
         {
+            BundleTable.EnableOptimizations = false;
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                 "~/Scripts/jquery.validate.unobtrusive*",
                 "~/Scripts/jquery.validate*"));
@@ -33,7 +34,7 @@ namespace BlogUI
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                 "~/Content/bootstrap.css",
-                "~/Content/clean-blog.min.css",
+                "~/Content/clean-blog.css",
                 "~/Content/Site.css",
                 "~/Content/CodeHighlight/obsidian.css"
                 //HighlitghC:\Users\Konrad\Source\Repos\Umysl-zamkniety\BlogUI\Content\

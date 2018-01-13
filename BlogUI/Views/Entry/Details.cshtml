@@ -1,19 +1,13 @@
 ﻿@model Common.UI.IDisplayEntry
 
-@{
-    ViewBag.Title = "Umysł zamknięty";
-    ViewBag.BgImage = @"../../img/logo.jpg";
-    ViewBag.SubTitle = "Whatever you're thinking, think bigger";
-    ViewBag.SubHeading = "Tony Hsieh";
-}
-
 <div class="row">
     <article class="col-lg-10 col-md-8 mx-auto">
         <section class="entry">
             <section id="entry-header">
                 <h3>
+                    <p>
                     @Html.DisplayFor(model => model.Entry.Title, "UpperFirstSign")
-                </h3>
+                    </p></h3>
             </section>
 
             <section id="entry-body">
@@ -24,11 +18,11 @@
 
             <section id="entry-footer">
                 <p align="right">
-                    @Html.DisplayFor(model => model.Entry.Timestamp, "UpperDateFirstSign")
+                    @Html.DisplayFor(model => model.Entry.Timestamp, "DateTime")
                 </p>
             </section>
 
-            <section class="add-comment">
+            <section id="add-comment">
                 @Html.ValidationSummary(false, "", new { @class = "text-danger" })
                 @{
                     Html.RenderAction("Create", "Comment", Model.NewComment);
@@ -37,7 +31,7 @@
 
             <br /><hr />
 
-            <section class="comments">
+            <section id="comments">
                 @{
                     Html.RenderPartial("~/Views/Comment/Comments.cshtml", Model.Entry.Comments);
                 }
