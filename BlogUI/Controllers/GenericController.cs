@@ -1,5 +1,7 @@
-﻿using System.Configuration;
+﻿using System;
+using System.Configuration;
 using System.Net;
+using System.Net.Mail;
 using System.Web.Mvc;
 using BlogUI.Models;
 using Common.DomainEntities;
@@ -43,6 +45,36 @@ namespace BlogUI.Controllers
             if (disposing)
                 Service?.Dispose();
             base.Dispose(disposing);
+        }
+        public void SendMsg(ContactMessage msg)
+        {
+            var mailer = ConfigurationManager.AppSettings["mailerUser"];
+            var smtpClient = new SmtpClient();
+            var basicCredential = new NetworkCredential(mailer, ConfigurationManager.AppSettings["mailerPassword"]);
+    
+            var message = new MailMessage();
+            var fromAddress = new MailAddress(mailer);
+
+            smtpClient.Host = "smtp.webio.pl";
+            smtpClient.Port = 587;
+            smtpClient.EnableSsl = true;
+            smtpClient.UseDefaultCredentials = false;
+            smtpClient.Credentials = basicCredential;
+
+            message.From = fromAddress;
+            message.Subject = msg.Topic ?? $"Message from {msg.Email} - {msg.Name}";
+            message.IsBodyHtml = true;
+            message.Body = msg.Message;
+            message.To.Add(msg.MailTo ?? "konrad.jagusiak@umyslzamkniety.pl");
+
+            try
+            {
+                smtpClient.Send(message);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
         }
 
         protected bool ValidateReCaptcha()

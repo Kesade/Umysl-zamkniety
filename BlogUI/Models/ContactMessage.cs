@@ -1,4 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Net.Mail;
+using System.Security.Policy;
 
 namespace BlogUI.Models
 {
@@ -13,5 +15,8 @@ namespace BlogUI.Models
 
         [Required]
         public string Message { get; set; }
+
+        public string Topic { get; set; }
+        public string MailTo { get; set; }
     }
 }

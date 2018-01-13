@@ -36,21 +36,7 @@ namespace BlogUI.Controllers
             return RedirectToAction("OkResult", new { message = "Email was sent, thank you :)"});
         }
 
-        public void SendMsg(ContactMessage msg)
-        {
-            var mail = ConfigurationManager.AppSettings["mailerUser"];
-            var client = new SmtpClient("smtp.gmail.com", 587)
-            {
-                Credentials = new NetworkCredential(
-                    mail,
-                    ConfigurationManager.AppSettings["mailerPassword"]),
-                EnableSsl = true
-            };
-
-            client.Send(new MailMessage(msg.Email, mail,
-                $"Message from {msg.Name} - {msg.Email}", msg.Message));
-        }
-
+     
         public virtual async Task<ActionResult> About()
         {
             return View();

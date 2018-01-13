@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
 using System.Web;
@@ -30,9 +31,17 @@ namespace BlogUI.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create(CreateUser model)
         {
-            ValidateReCaptcha();
+          //  ValidateReCaptcha();
             if (!ModelState.IsValid || !await RegisterUser(model))
                 return View(model);
+
+            SendMsg(new ContactMessage
+            {
+                Email =ConfigurationManager.AppSettings["mailerUser"],
+                Message = $"User with login: {model.Login} - {model.Name}, was successffully created.",
+                Topic = $"Registration completed."
+        });
+
 
             return RedirectToAction("OkResult", new{message = $"Hello {model.Name}, your account with Login {model.Login} was successfully created."});
         }
@@ -81,7 +90,7 @@ namespace BlogUI.Controllers
         }
         private async Task<bool> IsLoginUnique(ICreateUser model)
         {
-            var isLoginUnique = await ((UserService)Service).GetUser(new User { Login = model.Login }) == null;
+            var isLoginUnique = !await ((UserService)Service).Exists(new User { Login = model.Login });
             if (isLoginUnique) return true;
 
             ModelState.AddModelError("DuplicateLogin", "User with this login was already created.");
