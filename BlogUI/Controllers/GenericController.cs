@@ -48,33 +48,38 @@ namespace BlogUI.Controllers
         }
         public void SendMsg(ContactMessage msg)
         {
-            var mailer = ConfigurationManager.AppSettings["mailerUser"];
-            var smtpClient = new SmtpClient();
-            var basicCredential = new NetworkCredential(mailer, ConfigurationManager.AppSettings["mailerPassword"]);
-    
-            var message = new MailMessage();
-            var fromAddress = new MailAddress(mailer);
-
-            smtpClient.Host = "smtp.webio.pl";
-            smtpClient.Port = 587;
-            smtpClient.EnableSsl = true;
-            smtpClient.UseDefaultCredentials = false;
-            smtpClient.Credentials = basicCredential;
-
-            message.From = fromAddress;
-            message.Subject = msg.Topic ?? $"Message from {msg.Email} - {msg.Name}";
-            message.IsBodyHtml = true;
-            message.Body = msg.Message;
+            var fromAddress = new MailAddress(ConfigurationManager.AppSettings["mailerUser"]);
+            var message = new MailMessage
+            {
+                From = fromAddress,
+                Subject = msg.Topic ?? $"Message from {msg.Email} - {msg.Name}",
+                IsBodyHtml = true,
+                Body = msg.Message
+            };
             message.To.Add(msg.MailTo ?? "konrad.jagusiak@umyslzamkniety.pl");
 
             try
             {
-                smtpClient.Send(message);
+                GetSmtpClient().Send(message);
             }
             catch (Exception ex)
             {
                 throw;
             }
+        }
+
+        private static SmtpClient GetSmtpClient()
+        {
+            var basicCredential = new NetworkCredential(ConfigurationManager.AppSettings["mailerUser"], ConfigurationManager.AppSettings["mailerPassword"]);
+            var smtpClient = new SmtpClient
+            {
+                Host = ConfigurationManager.AppSettings["mailerHost"],
+                Port = int.Parse(ConfigurationManager.AppSettings["mailerPort"]),
+                EnableSsl = bool.Parse(ConfigurationManager.AppSettings["mailerSsl"]),
+                UseDefaultCredentials = false,
+                Credentials = basicCredential
+            };
+            return smtpClient;
         }
 
         protected bool ValidateReCaptcha()
