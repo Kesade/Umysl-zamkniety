@@ -2,9 +2,12 @@
 @{
     Layout = null;
 }
+
 <div id="clickme">
-    <h4 class="post-subtitle">Would you like to comment?</h4>
+    <button id="leave-comment" class="btn btn-default">Leave comment.</button>
 </div>
+
+<br/>
 
 <div id="create-comment" style="display: none">
     @using (Html.BeginForm("CreateComment", "Entry", FormMethod.Post, null))
@@ -12,7 +15,7 @@
         @Html.AntiForgeryToken()
         @Html.HiddenFor(x => x.ParrentId)
         <div class="col-md-10">
-            @Html.TextAreaFor(model => model.Body, new {style = "width:115%", id = "autosize", placeholder = "Share your opinion", @class = "form-control"})
+            @Html.TextAreaFor(model => model.Body, new {style = "width:115%", id = "autosize", placeholder = "...", @class = "form-control"})
             @Html.ValidationMessageFor(model => model.Body, "", new {@class = "text-danger"})
         </div>
 
@@ -28,6 +31,10 @@
 </div>
 
 <script>
+    $("#leave-comment").mouseup(function() {
+        $(this).blur();
+    });
+
     $("#clickme").click(function() {
         if ($("#create-comment").is(":visible")) {
             $("#create-comment").hide("slow");

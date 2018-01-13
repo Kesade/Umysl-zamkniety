@@ -1,13 +1,18 @@
-﻿@model string
+﻿@using System.Text.RegularExpressions
+
+@model string
 
 @{
-    var limit = 250;
-    if (Model.Length <= limit)
+
+    var limit = Model.Length > 250 ? 250 : Model.Length;
+
+    if (Regex.IsMatch(Model.Substring(0, limit).ToLower(), @"<pre"))
     {
-        <i>@Model</i>
+        while (!Regex.IsMatch(Model.Substring(0, limit).ToLower(), @"</pre>"))
+        {
+            limit++;
+        }
     }
-    else
-    {
-        <i>@Model.Substring(0, limit) [...]</i>
-    }
+
+    <i>@Html.Raw(Model.Substring(0, limit)) [...]</i>
 }

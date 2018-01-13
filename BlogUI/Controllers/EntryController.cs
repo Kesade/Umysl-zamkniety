@@ -35,9 +35,15 @@ namespace BlogUI.Controllers
         }
 
         [HttpPost]
+        //[ValidateInput(false)]
         [ValidateAntiForgeryToken]
         public virtual async Task<ActionResult> Create(CreateEntry model)
         {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+            model.Body = model.Body.Replace("\n", "");
             model.Diary = await _diary.GetById(model.ParrentId);
             model.Author = await ((UserService) _users).GetCurrentUser();
             await ((EntryService) Service).Put(model);

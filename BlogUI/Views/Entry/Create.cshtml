@@ -1,4 +1,5 @@
-﻿@model Common.UI.ICreateEntry
+﻿@using Common.Helpers
+@model Common.UI.ICreateEntry
 
 @{
     ViewBag.Title = "Umysł zamknięty";
@@ -9,10 +10,10 @@
 <h2>Create - @HttpContext.Current.User.Identity.Name</h2>
 
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Create","Entry",null,FormMethod.Post,new {id="form"}))
 {
     @Html.AntiForgeryToken()
-
+    @Html.ValidationSummary("",new {@class="alert-danger"});
     @Html.HiddenFor(x => x.ParrentId)
     <div class="form-horizontal">
         <hr/>
@@ -20,27 +21,86 @@
             @Html.LabelFor(model => model.Title, new {@class = "control-label col-md-2"})
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Title, new {htmlAttributes = new {placeholder = "Title", @class = "form-control"}})
-                @Html.ValidationMessageFor(model => model.Title, "", new {@class = "text-danger"})
             </div>
         </div>
-        <div class="form-group floating-label-form-group">
-            @Html.LabelFor(model => model.Body, new {@class = "control-label col-md-2"})
-            <div class="col-md-10">
-                @Html.TextAreaFor(model => model.Body, new {id = "autosize", placeholder = "Write something down :)", @class = "form-control"})
-                @Html.ValidationMessageFor(model => model.Body, "", new {@class = "text-danger"})
-            </div>
-        </div>
+        <div class="container">
+            <div id="toolbar"></div>
+            <div id="editor"></div>
+        </div>         
         <br/>
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default"/>
+                <div id="Save" class="btn btn-default">Submit</div>
             </div>
         </div>
     </div>
+    <div>
+        @Html.ActionLink("Back to List", "Index","Home")
+    </div>
+
+    <div style="display: none" id="justHtml"></div>
+    @Html.TextAreaFor(model => model.Body, new {@class="invisible", id = "full-editor" })
 }
-<div>
-    @Html.ActionLink("Back to List", "Index","Home")
-</div>
+
+
+<script>
+    $(document).ready(function () {
+        var y = document.getElementById('justHtml');
+
+        $('#Save').click(function() {
+            $(y.querySelectorAll('pre')).each(function() {
+                $(this).wrapInner("<code></code>");
+            });
+            console.log(y.innerHTML);
+            document.getElementById('full-editor').innerHTML = y.innerHTML;
+
+            $("#form").submit();
+        });
+    });
+</script>
+<!-- Initialize editor with toolbar -->
+<script>
+    
+    var toolbarOptions = [
+        ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
+        ['blockquote', 'code-block'],
+
+        [{ 'header': 1 }, { 'header': 2 }],               // custom button values
+        [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+        [{ 'script': 'sub'}, { 'script': 'super' }],      // superscript/subscript
+        [{ 'indent': '-1'}, { 'indent': '+1' }],          // outdent/indent
+        [{ 'direction': 'rtl' }],                         // text direction
+
+        [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
+        [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+
+        [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
+        [{ 'font': [] }],
+        [{ 'align': [] }],
+
+        ['link'],
+        ['image'],
+
+        ['clean']                                         // remove formatting button
+     
+
+    ];
+
+    var quill = new Quill('#editor', {
+        modules: {
+            syntax: true,              // Include syntax module
+            toolbar: toolbarOptions
+        },
+        theme: 'snow'
+    });
+    var justHtmlContent = document.getElementById('justHtml');
+
+    quill.on('text-change', function () {
+        var justHtml = quill.root.innerHTML;
+        justHtmlContent.innerHTML = justHtml;
+    });
+</script>
+
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

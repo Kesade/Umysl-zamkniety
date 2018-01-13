@@ -83,6 +83,7 @@
     <Compile Include="DomainEntities\IUserDomainEntity.cs" />
     <Compile Include="Enums\EntryType.cs" />
     <Compile Include="Helpers\ConcreteConverter.cs" />
+    <Compile Include="Helpers\StringHelpers.cs" />
     <Compile Include="Helpers\UIExtensions.cs" />
     <Compile Include="Repositories\IEntityFrameworkRepository.cs" />
     <Compile Include="Repositories\IRepository.cs" />

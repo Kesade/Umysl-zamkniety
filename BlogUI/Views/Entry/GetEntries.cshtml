@@ -10,16 +10,16 @@
         {
             <section class="entry">
                 <div class="post-preview">
-                    <a href="@Url.Action("Index", "Home")">
                         <section id="entry-header">
                             <h2 class="post-title">
                                 @Html.ActionLink(item.Title, "Details", new {id = item.Id})
                             </h2>
                         </section>
+                    <section id="entry-header">
                         <p class="post-body">
                             @Html.DisplayFor(modelItem => item.Body, "BeginningOfBody")
                         </p>
-                    </a>
+                    </section>
                     <p class="post-meta">
                         Posted by
                         @Html.DisplayFor(modelItem => item.Author.Name)

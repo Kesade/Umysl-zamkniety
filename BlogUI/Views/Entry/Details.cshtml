@@ -9,39 +9,43 @@
 
 <div class="row">
     <article class="col-lg-10 col-md-8 mx-auto">
-
-
-        <div class="row">
-            <section class="entry">
-                <section id="entry-header">
-                    <h3>@Html.DisplayFor(model => model.Entry.Title, "UpperFirstSign")</h3>
-                </section>
-                <p>
-                    @Html.DisplayFor(model => model.Entry.Body, "UpperFirstSign")
-                </p>
-
-                <section id="entry-footer">
-                    <p align="right">@Html.DisplayFor(model => model.Entry.Timestamp, "UpperDateFirstSign")</p>
-                </section>
+        <section class="entry">
+            <section id="entry-header">
+                <h3>
+                    @Html.DisplayFor(model => model.Entry.Title, "UpperFirstSign")
+                </h3>
             </section>
-        </div>
-        <section class="add-comment">
-            @Html.ValidationSummary(false, "", new {@class = "text-danger"})
-            @{
-                Html.RenderAction("Create", "Comment", Model.NewComment);
-            }
-        </section>
 
-        <br/><hr/>
-        <div class="row">
+            <section id="entry-body">
+                <p>
+                    @Html.DisplayFor(model => model.Entry.Body, "DisplayHtml")  
+                </p>
+            </section>
+
+            <section id="entry-footer">
+                <p align="right">
+                    @Html.DisplayFor(model => model.Entry.Timestamp, "UpperDateFirstSign")
+                </p>
+            </section>
+
+            <section class="add-comment">
+                @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+                @{
+                    Html.RenderAction("Create", "Comment", Model.NewComment);
+                }
+            </section>
+
+            <br /><hr />
+
             <section class="comments">
                 @{
                     Html.RenderPartial("~/Views/Comment/Comments.cshtml", Model.Entry.Comments);
                 }
             </section>
-        </div>
-        <p>
-            @Html.ActionLink("Back to List", "Index", "Home")
-        </p>
+
+            <p>
+                @Html.ActionLink("Back to List", "Index", "Home")
+            </p>
+        </section>
     </article>
 </div>
