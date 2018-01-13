@@ -1,9 +1,5 @@
-﻿@model string
-@if (Model == "Konrad")
-{
-    <i  style="color: goldenrod">@Model</i>
-}
-else
-{
-    <i>@Model</i>
+﻿@model Common.DomainEntities.IUserDomainEntity
+
+@{
+    <i  style="color: @Model.GetRoleColor()">@Model</i>
 }
